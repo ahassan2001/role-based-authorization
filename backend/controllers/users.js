@@ -4,8 +4,12 @@ const db = require("../models")
 const { User } = db
 
 router.post('/', async (req, res) => {
-    const user = await User.create(req.body)
-    res.json(user)
+    let { password, ... reset } = req.body;
+    const user = await User.create({
+        ... rest,
+        role: 'reviewer',
+        passwordDigest: await bcrypt.hash(password, 10)
+    })
 })
 
 

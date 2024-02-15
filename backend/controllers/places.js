@@ -135,4 +135,23 @@ router.delete('/:placeId/comments/:commentId', async (req, res) => {
 })
 
 
+router.post('/', async (req, res) => {
+    if(req.currentUser?.role !== 'admin'){
+        return res.status(403).json({ message: 'You are not allowed to add a place'})
+    }
+  
+})
+
+router.put('/:placeId', async (req, res) => {
+    if(req.currentUser?.role !== 'admin'){
+        return res.status(403).json({ message: 'You are not allowed to edit places'})
+    }
+      
+})
+router.delete('/:placeId', async (req, res) => {
+    if(req.currentUser?.role !== 'admin'){
+        return res.status(403).json({ message: 'You are not allowed to delete places'})
+    }
+})
+
 module.exports = router
